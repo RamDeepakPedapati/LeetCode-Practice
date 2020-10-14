@@ -1,7 +1,9 @@
 class Solution {
     public boolean buddyStrings(String A, String B) {
+    //Checking the lengths of the two strings
         if(A.length()!=B.length())
             return false;
+     // Checking if the two strings are equal
         if(A.equals(B))
         {
             int count[] = new int[26];
