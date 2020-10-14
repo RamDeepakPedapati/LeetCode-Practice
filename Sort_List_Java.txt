@@ -1,0 +1,84 @@
+class Solution {
+    ListNode merge(ListNode head1,ListNode head2)
+    {
+        if(head1==null)
+            return head2;
+        if(head2==null)
+            return head1;
+        ListNode res=null;
+        ListNode ans=null;
+        ListNode temp1=head1;
+        ListNode temp2=head2;
+        
+        if(temp1.val<temp2.val)
+        {
+            
+            ans=temp1;
+            temp1=temp1.next;
+            res=ans;
+        }
+        else{
+            ans=temp2;
+            temp2=temp2.next;
+            res=ans;
+        }
+        
+        
+        while(temp1!=null && temp2!=null)
+        {
+            if(temp1.val<temp2.val)
+            {
+                ans.next=temp1;
+                ans=ans.next;
+                temp1=temp1.next;
+            }
+            else
+            {
+                ans.next=temp2;
+                ans=ans.next;
+                temp2=temp2.next;
+            }   
+        }
+        
+        while(temp1!=null)
+        {
+             ans.next=temp1;
+            ans=ans.next;
+            temp1=temp1.next;
+        }
+        
+         while(temp2!=null)
+        {
+             ans.next=temp2;
+                ans=ans.next;
+                temp2=temp2.next;
+        }
+
+        return res;
+    }
+    
+    
+    
+    public ListNode mergeList(ListNode head)
+    {
+        if(head==null || head.next==null)
+            return head;
+        ListNode slow=head;
+        ListNode fast=head.next;
+        while(fast!=null && fast.next!=null)
+        {
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        ListNode nxt=slow.next;
+        slow.next=null;
+        return merge(mergeList(head),mergeList(nxt));
+    }
+    
+    
+    
+    public ListNode sortList(ListNode head) {
+        return mergeList(head);
+        
+    }
+}
