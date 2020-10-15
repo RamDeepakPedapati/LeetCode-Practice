@@ -1,0 +1,22 @@
+class Solution {
+    public int findMax(int []nums,int low,int high)
+    {
+        if(low==high || low+1==high)
+            return nums[low];
+    
+        int dp[]=new int[high];
+        dp[low]=nums[low];
+        dp[low+1]=Math.max(nums[low+1],nums[low]);
+        for(int i=low+2;i<high;i++)
+        {
+            dp[i]=Math.max(dp[i-1],nums[i]+dp[i-2]);
+        }
+        return dp[high-1];
+    }
+    
+    public int rob(int[] nums) {
+        if(nums.length==1)
+            return nums[0];
+        return Math.max(findMax(nums,0,nums.length-1),findMax(nums,1,nums.length));
+    }
+}
