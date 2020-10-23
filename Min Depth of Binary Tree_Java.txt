@@ -1,0 +1,29 @@
+class Solution {
+    int ans=Integer.MAX_VALUE;
+    void mindep(TreeNode root,int temp)
+    {
+        
+        temp++;
+        if(root==null)
+            return;
+        else if(root.left==null && root.right==null)
+        {
+            ans=Math.min(ans,temp);
+        }
+        else
+        {
+            mindep(root.left,temp);
+            mindep(root.right,temp);
+            return ;
+        }
+        
+    }
+    
+    public int minDepth(TreeNode root) {
+        ans=Integer.MAX_VALUE;
+        if(root==null)
+            return 0;
+        mindep(root,0);
+        return ans;
+    }
+}
