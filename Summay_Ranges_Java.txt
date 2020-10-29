@@ -1,0 +1,20 @@
+class Solution {
+    public List<String> summaryRanges(int[] nums) {
+        Arrays.sort(nums);
+        List<String> l=new ArrayList<String>();
+        int start,end;
+        for(int i=0;i<nums.length;)
+        {
+            start=nums[i];
+            end=nums[i++];
+            while(i<nums.length && nums[i]==nums[i-1]+1)
+                end=nums[i++];
+    
+            if(start!=end)
+                l.add((new Integer(start)).toString()+"->"+(new Integer(end)).toString());
+            else
+                l.add((new Integer(start)).toString());
+        }
+        return l;
+    }
+}
