@@ -1,0 +1,57 @@
+class Solution {
+    public int maxDistToClosest(int[] seats) {
+        int prev[]=new int[seats.length];
+        if(seats[0]==1)
+            prev[0]=0;
+        else 
+            prev[0]=-1;
+        
+        for(int i=1;i<seats.length;i++)
+        {
+            if(seats[i]==1)
+                prev[i]=0;
+            else
+                if(prev[i-1]==-1)
+                    prev[i]=Integer.MAX_VALUE;
+                else 
+                    prev[i]=prev[i-1]+1;
+        }
+        
+        int maxi=0;
+        int count=0;
+        if(seats[seats.length-1]==1)
+        {
+            count=0;
+            maxi=0;
+        }
+        else 
+        {
+            maxi=prev[seats.length-1];
+            count=-1;
+        }
+        
+            
+        
+        for(int i=seats.length-2;i>=0;i--)
+        {
+             if(seats[i]==1)
+                {
+                    count=0;
+                }
+            else
+            {
+                
+                if(count==-1)
+                    count=-1;
+                else 
+                    count=count+1;
+                if(prev[i]==-1)
+                    maxi=Math.max(maxi,count);
+                else
+                    maxi=Math.max(maxi,Math.min(prev[i],count));
+            }   
+        }
+        
+        return maxi;
+    }
+}
