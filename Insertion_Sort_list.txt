@@ -1,0 +1,40 @@
+class Solution {
+    public ListNode insert(ListNode head,ListNode newNode)
+    {
+        if(head==null)
+            return newNode;
+        if(head.val>=newNode.val)
+        {
+            newNode.next=head;
+            return newNode;
+        }
+        
+        ListNode temp=head;
+        ListNode prev=null;
+        while(temp!=null && temp.val<newNode.val)
+        {
+            prev=temp;
+            temp=temp.next;
+        }
+        prev.next=newNode;
+        newNode.next=temp;
+        return head;
+
+            
+    }
+    public ListNode insertionSortList(ListNode head) {
+        if(head==null || head.next==null)
+            return head;
+        ListNode newList=head;
+        head=head.next;
+        newList.next=null;
+        while(head!=null)
+        {
+            ListNode temp=head;
+            head=head.next;
+            temp.next=null;
+            newList=insert(newList,temp);
+        }
+        return newList;
+    }
+}
