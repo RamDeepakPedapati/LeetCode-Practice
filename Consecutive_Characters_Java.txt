@@ -1,0 +1,17 @@
+class Solution {
+    public int maxPower(String s) {
+        int i=0,count,maxi=0;
+        char c;
+        while(i<s.length())
+        {
+            c=s.charAt(i);
+            count=0;
+            while(i<s.length() && c==s.charAt(i)){
+                count++;
+                i++;
+            }
+            maxi=Math.max(maxi,count);
+        }
+        return maxi;
+    }
+}
