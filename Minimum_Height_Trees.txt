@@ -1,0 +1,62 @@
+class Solution {
+    public List<Integer> findMinHeightTrees(int n, int[][] edges) {
+        
+        if (n < 2) {
+            ArrayList<Integer>ans = new ArrayList<>();
+            for (int i = 0; i < n; i++)
+                ans.add(i);
+            return ans;
+        }
+        
+        ArrayList<ArrayList<Integer>> arrList=new ArrayList<ArrayList<Integer>>();
+        for(int i=0;i<n;i++)
+            arrList.add(new ArrayList<>());
+        
+        Queue<Integer> q=new LinkedList<>();
+        int indeg[]=new int[n];
+        for(int i=0;i<edges.length;i++)
+        {
+            indeg[edges[i][0]]++;
+            indeg[edges[i][1]]++;
+            arrList.get(edges[i][0]).add(edges[i][1]);
+            arrList.get(edges[i][1]).add(edges[i][0]);
+        }
+        
+        for(int i=0;i<indeg.length;i++)
+            if(indeg[i]==1)
+                q.add(i);
+        
+        
+        int remainingNodes=n;
+        Set<Integer> set=new HashSet<Integer>();
+        
+        while(remainingNodes>2)
+        {
+            remainingNodes-=q.size();
+            int qsize=q.size();
+            for(int k=0;k<qsize;k++)
+            {
+                int t=q.poll();
+                set.add(t);
+                for(int i=0;i<arrList.get(t).size();i++)
+                {
+                    indeg[arrList.get(t).get(i)]--;
+                    if(indeg[arrList.get(t).get(i)]==1 && !set.contains(arrList.get(t).get(i)))
+                    {
+                        q.add(arrList.get(t).get(i));
+                      //  System.out.println(arrList.get(t).get(i));
+                    }
+                }
+            }
+            
+        }
+        
+        ArrayList<Integer> ans=new ArrayList<Integer>();
+        while(q.size()>0)
+        {
+            ans.add(q.poll());
+        }
+        return ans;
+        
+    }
+}
