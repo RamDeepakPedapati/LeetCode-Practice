@@ -1,0 +1,70 @@
+class Solution {
+    
+    ListNode reverse(ListNode head)
+    {
+        if(head==null || head.next==null)
+            return head;
+        
+        ListNode temp=head;
+        ListNode prev=null;
+        ListNode nxt=head;
+        while(temp!=null)
+        {
+            nxt=temp.next;
+            temp.next=prev;
+            prev=temp;
+            temp=nxt;
+        }
+        return prev;
+    }
+    
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        l1=reverse(l1);
+        l2=reverse(l2);
+        
+        int sum=0,carry=0;
+        ListNode temp1=l1,temp2=l2;
+        ListNode ans=new ListNode(0);
+        ListNode res=ans;
+        
+        while(temp1!=null && temp2!=null)
+        {
+            sum=temp1.val+temp2.val+carry;
+            carry=sum/10;
+            temp1.val=sum%10;
+            ans.next=temp1;
+            ans=ans.next;
+            temp1=temp1.next;
+            temp2=temp2.next;
+        }
+        
+        while(temp1!=null)
+        {
+            sum=temp1.val+carry;
+            carry=sum/10;
+            temp1.val=sum%10;
+            ans.next=temp1;
+            ans=ans.next;
+            temp1=temp1.next;
+        }
+        
+        while(temp2!=null)
+        {
+            sum=temp2.val+carry;
+            carry=sum/10;
+            temp2.val=sum%10;
+            ans.next=temp2;
+            ans=ans.next;
+            temp2=temp2.next;
+        }
+        ans.next=null;
+        if(carry!=0)
+            ans.next=new ListNode(carry);
+        
+        
+       return reverse(res.next);
+        
+        
+        
+    }
+}
