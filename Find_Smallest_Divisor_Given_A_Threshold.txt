@@ -1,0 +1,26 @@
+class Solution {
+    
+    int findValue(int []nums,int mid)
+    {
+        int ans=0;
+        for(int i=0;i<nums.length;i++)
+            if(nums[i]%mid!=0)
+                ans+=(nums[i]/mid) +1;
+            else 
+                ans+=nums[i]/mid;
+        
+        return ans;
+    }
+    public int smallestDivisor(int[] nums, int threshold) {
+        int low=1,high=1000001,mid;
+        while(low<=high)
+        {
+            mid=low+(high-low)/2;
+            if(findValue(nums,mid)<=threshold)
+                high=mid-1;
+            else
+                low=mid+1;
+        }
+        return low;
+    }
+}
