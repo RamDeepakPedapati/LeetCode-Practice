@@ -1,0 +1,21 @@
+class Solution {
+    int res=0;
+    
+    void traverse(TreeNode root,int maxi,int mini){
+        if(root==null)
+            res=Math.max(res,maxi-mini);
+        else {
+            maxi=Math.max(maxi,root.val);
+            mini=Math.min(mini,root.val);
+            traverse(root.left,maxi,mini);
+            traverse(root.right,maxi,mini);
+        }
+    }
+    
+    public int maxAncestorDiff(TreeNode root) {
+        res=0;
+        traverse(root,Integer.MIN_VALUE,Integer.MAX_VALUE);
+        return res;
+        
+    }
+}
