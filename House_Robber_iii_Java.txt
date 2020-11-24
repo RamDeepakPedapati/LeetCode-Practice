@@ -1,0 +1,44 @@
+class Solution {
+    public void traverse(TreeNode root)
+    {
+        if(root==null)
+            return;
+        if(root.left==null && root.right==null)
+            return;
+        else 
+        {
+            int case1=root.val,case2=0;
+            traverse(root.left);
+            traverse(root.right);
+            
+            if(root.left!=null)
+                case2+=root.left.val;
+            if(root.right!=null)
+                case2+=root.right.val;
+            if(root.left!=null)
+            {
+                if(root.left.left!=null)
+                    case1+=root.left.left.val;
+                if(root.left.right!=null)
+                    case1+=root.left.right.val;
+            }
+            if(root.right!=null)
+            {
+                if(root.right.left!=null)
+                    case1+=root.right.left.val;
+                if(root.right.right!=null)
+                    case1+=root.right.right.val;
+            }
+            root.val=Math.max(case1,case2);
+        }
+    }
+    
+
+    
+    public int rob(TreeNode root) {
+        if(root==null)
+            return 0;
+        traverse(root);
+        return root.val;
+    }
+}
