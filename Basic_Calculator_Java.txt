@@ -1,0 +1,29 @@
+class Solution {
+    public int calculate(String s) {
+        int length=s.length();
+         if (s == null || length == 0) return 0;
+        int currNum = 0, lastNumber = 0, ans = 0;
+        char operation = '+';
+        
+        for (int i = 0; i < length; i++) {
+            char currentChar = s.charAt(i);
+            if (Character.isDigit(currentChar)) {
+                currNum = (currNum * 10) + (currentChar - '0');
+            }
+            if (!Character.isDigit(currentChar) && !Character.isWhitespace(currentChar) || i == length - 1) {
+                if (operation == '+' || operation == '-') {
+                    ans += lastNumber;
+                    lastNumber = (operation == '+') ? currNum : -currNum;
+                } else if (operation == '*') {
+                    lastNumber = lastNumber * currNum;
+                } else if (operation == '/') {
+                    lastNumber = lastNumber / currNum;
+                }
+                operation = currentChar;
+                currNum = 0;
+            }
+        }
+        ans += lastNumber;
+        return ans;
+    }
+}
