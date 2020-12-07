@@ -1,0 +1,36 @@
+class Solution {
+    public Node connect(Node root) {
+        Node temp=root;
+        while(temp!=null){
+            Node start=null;
+            Node temp1=null;
+            while(temp!=null){
+                
+                if(temp.left!=null){
+                    if(start==null){
+                        start=temp.left;
+                        temp1=temp.left;
+                    }
+                    else{
+                        temp1.next=temp.left;
+                        temp1=temp1.next;
+                    }
+                }
+                
+                if(temp.right!=null){
+                    if(start==null){
+                        start=temp.right;
+                        temp1=temp.right;
+                    }
+                    else{
+                        temp1.next=temp.right;
+                        temp1=temp1.next;
+                    }
+                }
+                temp=temp.next;
+            }
+            temp=start;
+        }
+        return root;
+    }
+}
