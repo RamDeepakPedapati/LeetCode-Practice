@@ -1,0 +1,24 @@
+class Solution {
+   
+    boolean isValid(TreeNode A)
+    {
+        if(A==null)
+            return true;
+        if(!isValid(A.left))
+            return false;
+        if(prev!=null && prev>=A.val)
+            return false;
+        prev=A.val;
+        return isValid(A.right);
+        
+    }
+    
+    Integer prev=null;
+    
+    public boolean isValidBST(TreeNode root) {
+     
+       prev=null;
+       return isValid(root);
+        
+    }
+}
